@@ -130,6 +130,7 @@ html, body {
     width: 40%;
     min-width: 500px;
     height: 80px;
+    border-radius: 10px 0px 0px 10px;
 }
 
 .title-bar h1,  .title-bar h3{
