@@ -13,7 +13,7 @@
     <body>
     <!-- http://explorables.cmucreatelab.org/data-visualization-tools/examples/createlab-viirs/google-maps.html -->
         <div class="content-area" id="example-map">
-            <iframe src="" frameborder="0"></iframe>
+            <iframe src="http://explorables.cmucreatelab.org/data-visualization-tools/examples/createlab-viirs/google-maps.html" frameborder="0"></iframe>
             <div class='title-bar' id='title'><h1><span style="white-space: nowrap;">Timelapse Visualization</span> Generator</h1></div>
             <div class='title-bar' id='subtitle'><h3>A simple CREATE Lab utility to allow non-programmers<br>to create embeddable WebGL based map visualizations.</h3></div>
         </div>
@@ -61,18 +61,18 @@
                     <fieldset>
                         <legend>Upload CSV File:</legend>
                         <br>
-                        <input type='hidden' id='MAX_FILE_SIZE' name='MAX_FILE_SIZE' value=4000000000/>
-                        <div>
+<!--                         <input type='hidden' id='MAX_FILE_SIZE' name='MAX_FILE_SIZE' value=4000000000/>
+ -->                    <div>
                             <label for="fileselect">Select a file from your computer</label>
                             <br>
-                            <input type="file" id="fileselect" name="fileselect" required/>
+                            <input type="file" id="fileselect" name="csv_file" required/>
                             <br>
                         </div>
                         <br>
-                        <label for="title">Name of your project:</label>
-                        <input type='text' name='title' placeholder='name of project' required/>
+                        <label for="project_name">Name of your project:</label>
+                        <input type='text' name='project_name' placeholder='name of project' required/>
                         <br>
-                        <label for="title" style='padding-right: 73px'>Your email:</label>
+                        <label for="email" style='padding-right: 73px'>Your email:</label>
                         <input type='email' name='email' placeholder='your email' required/>
                         <br><br>
                         <input type="submit" name='submit' value="Submit"/>

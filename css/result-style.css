@@ -43,7 +43,7 @@ hr {
     height: 1px;
     border: 0;
     border-top: 1px solid #ccc;
-    margin: 1em 0;
+    margin: 0 0;
     padding: 0;
 }
 
@@ -87,7 +87,283 @@ html, body {
     height: 100%; 
     width: 100%; 
     margin: 0; 
+    color: white;
+    font-weight: lighter;
+    min-width: 800px;
+    min-height: 450px;
 }
+
+#map-tools{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.very-top:{
+    top: 30px;
+}
+
+.top {
+    top: 10%;
+}
+
+.bottom {
+    bottom: 80px;
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.left {
+    left: 5%;
+}
+
+.right {
+    right: 5%;
+}
+
+
+.tool-window{
+    position: absolute;
+    background-color: rgba(30,30,30, .85);
+    border: 3px solid rgb(50,50,50);
+    border-radius: 15px;
+    pointer-events: auto;
+}
+
+.tool-window:before {
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-color: rgba(100,100,100, .85);
+    border-radius: 13px 13px 3px 3px;
+    text-align: center;
+    line-height: 30px;
+}
+
+#map-settings:before{
+    content: 'Set Default Map';
+}
+
+#timeline-settings{
+    min-height: 153px;
+}
+
+#timeline-settings:before{
+    content: 'Set Timeline';
+}
+
+#webgl-settings{
+    width: 20%;
+    min-width: 430px;
+    z-index: 100;
+}
+
+#webgl-settings:before{
+    content: 'Set Point Attributes';
+}
+
+#drop-down-list{
+    position: relative;
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+#webgl-settings ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#webgl-settings-list{
+    display: inline-block;
+    position: relative;
+    float: left;
+    width: 50%;
+}
+
+
+#webgl-settings-list li{
+    height: 50px;
+    word-wrap:break-word;
+    background: rgba(15,15,15, .5);
+    line-height: 40px;
+
+}
+
+.tool-options {
+    opacity: 0;
+    position: absolute;   
+}
+
+.tool-options, .tool-options-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.tool-options-label{
+    position: relative;
+}
+
+.tool-options + .tool-options-label:before{
+    content: '';
+    background: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+    margin-right: 10px;
+    text-align: center;
+    border-radius: 50%
+}
+
+.tool-options:checked + .tool-options-label:before {
+    background: #0dc4a3;
+}
+
+
+#webgl-inner-tools{
+    display: inline-block;
+    position: relative;
+    float: right;
+    width: 50%;
+    height: calc(100% - 30px);
+    border-radius: 0px 0px 5px 0px;
+    transition: right .5s, opacity .3s;
+}
+
+
+.triangle-pointer{
+    position: absolute;
+    left: 0px;
+    width: 0; 
+    height: 0; 
+    border-top: 24px solid transparent;
+    border-bottom: 24px solid transparent; 
+    border-left: 20px solid rgba(15,15,15, .5);
+    transition: top .3s;
+}
+
+#first-pointer{
+    top: 0px;
+}
+#second-pointer{
+    top: 52px;
+}
+#third-pointer{
+    top: 105px;
+}
+#fourth-pointer{
+    top: 156px;
+}
+#fifth-pointer{
+    top: 209px;
+}
+
+.set-attribute{
+    height: 50px;
+    line-height: 56px;
+    margin-left: 25px;
+}
+.set-attribute > input{
+    position: relative;
+    float: left;
+    margin-top: 20px;
+}
+
+.value{
+    position: relative;
+    float: left;
+    margin-left: 5px;
+    height: 15px;
+    width: 25px;
+    margin-top: 15px;
+    color: black;
+    font-size: 13px;
+}
+
+#timeline-settings form{
+    margin: 12px;
+}
+
+
+#timeline-settings input[type=number]{
+    font-size: 13px;
+    color: black;
+    width: 35px;
+}
+
+#time-to-complete label, #time-to-complete input {
+    display: inline-block;
+    vertical-align: baseline;
+    width: 80px;
+}
+
+#timeline-settings label{
+    margin-left: 15px;
+}
+
+#timeline-settings legend{
+    margin-bottom: 5px;
+}
+
+.button { 
+    height: 35px;
+    margin: 10px;
+    display: inline-block;
+    background-color: #0dc4a3;
+    border: 5px solid rgb(100,100,100);
+    border-radius: 5px;
+    line-height: 35px;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    -webkit-transition: background-color .3s;
+    transition: background-color .3s;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 150;
+}
+
+.button:hover {
+  background-color: rgb(50,50,50);
+  cursor: pointer;
+}
+
+.button:active {
+  background-color: rgb(90,90,90);
+  cursor: pointer;
+}
+
+#set-map-button {
+    width: 170px;   
+}
+
+#preview-button{
+    width: 100px;
+}
+
+.preview:before{
+   content: 'Preview'; 
+}
+
+.show-tools:before{
+   content: 'Show Tools'; 
+}
+
+#submit-button{
+    width: 100px;
+}
+
 
 /* ==========================================================================
    Helper classes
@@ -180,6 +456,30 @@ html, body {
    Modify as content requires.
    ========================================================================== */
 
+@media  (max-width: 800px){
+    .right{
+        right: 5%;
+        left: 300px;
+    }
+
+    .left{
+        left: 40px;
+    }
+}
+
+@media  (max-height: 450px){
+    .bottom{
+        bottom: ;
+        top: 225px;
+    }
+}
+
+
+@media  (max-height: 600px){
+    .top{
+        top: 60px;
+    }
+}
 
 @media print,
        (-webkit-min-device-pixel-ratio: 1.25),
