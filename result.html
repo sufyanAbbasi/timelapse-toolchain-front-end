@@ -36,10 +36,19 @@
     <div id='map-tools'>
       <div id="preview-area" class="very-top center">
         <div id="preview-button" class="preview button no-highlight" 
-        onclick='$(".tool-window").toggleClass("hidden"); $("#preview-button").toggleClass("preview").toggleClass("show-tools")'></div>
-        <div id="submit-button" class="button no-highlight" onclick='submit();'>Submit</div>
+        onclick='preview();'></div>
+        <div id="submit-button" class="button no-highlight" onclick='submit();'>Save</div>
       </div>
-      <div class='tool-window top left' id='map-settings'>
+      <div class='tool-window top left' id='title-settings'>
+        <form >
+          <fieldset>
+            <label for="title">Title:<br><input type="textarea" name="title" disabled="true" /></label>
+            <br>
+            <label for="description">Description:<br><textarea name="description" cols="25" rows="8" disabled="true"></textarea></label>
+          </fieldset>
+        </form>
+      </div>
+      <div class='tool-window bottom right' id='map-settings'>
         <div id='set-map-button' class="button no-highlight" onclick="setMap()">Set Current Map View</div>
       </div>
       <div class='tool-window bottom left' id='timeline-settings'>
@@ -159,7 +168,8 @@
         formatCurrentTime: function(date) { return date.getFullYear() },
         animationRate: { fast: 45.28, medium: 90.56, slow: 181.12 }
       };
-      var datasets = [{ name: 'example-x-y-time', url: 'example-x-y-time.bin', duration: null, hardness: null, pointSize: null },{ name: 'example-x-y-z-time', url: 'example-x-y-time.bin', duration: null, hardness: null, pointSize: null }];
+      var datasets = [{ name: 'example-x-y-time', url: 'example-x-y-time.bin', duration: null, hardness: null, pointSize: null }, { name: 'example-x-y-z-time', url: 'example-x-y-time.bin', duration: null, hardness: null, pointSize: null }];
+      // ,{ name: 'example-x-y-z-time', url: 'example-x-y-time.bin', duration: null, hardness: null, pointSize: null }];
     </script>
 
     <script type="text/javascript">
@@ -337,9 +347,14 @@
             gl.uniform1f(obj.u_PointSizeLocation, obj.pointSize)
             gl.uniformMatrix4fv(obj.u_MapMatrixLocation, false, mapMatrix);
 
-            var max = timeSlider.getCurrentTime() - timeZoneOffset;
-            var min = (obj.duration == null || obj.duration <= 0) ? timeSliderOptions['startTime'] : max - obj.duration;
-            gl.uniform2f(obj.u_TimeBoundsLocation, min, max); // time in JavaScript epoch time (milliseconds since 1970) in UTC timezone
+            // var max = timeSlider.getCurrentTime() - timeZoneOffset;
+            // var min = (obj.duration == null || obj.duration <= 0) ? timeSliderOptions['startTime'] : max - obj.duration;
+            // gl.uniform2f(obj.u_TimeBoundsLocation, min, max); // time in JavaScript epoch time (milliseconds since 1970) in UTC timezone
+
+            var currentTime = timeSlider.getCurrentTime() - timeZoneOffset;
+            var min = currentTime - (obj.duration > 0 ? obj.duration : 0);
+            var max = currentTime - (obj.duration < 0 ? obj.duration : 0);
+            gl.uniform2f(obj.u_TimeBoundsLocation, min/1000.0, max/1000.0); // time in JavaScript epoch time (milliseconds since 1970) in UTC timezone
 
             // draw!  
             gl.drawArrays(gl.POINTS, 0, obj.count);

@@ -73,11 +73,11 @@ fieldset {
 }
 
 /*
- * Allow only vertical resizing of textareas.
+ * Allow NO resizing of textareas.
  */
 
 textarea {
-    resize: vertical;
+    resize: none;
 }
 
 /* ==========================================================================
@@ -91,6 +91,10 @@ html, body {
     font-weight: lighter;
     min-width: 800px;
     min-height: 450px;
+}
+
+input, textarea{
+    color: black;
 }
 
 #map-tools{
@@ -144,6 +148,10 @@ html, body {
     border-radius: 13px 13px 3px 3px;
     text-align: center;
     line-height: 30px;
+}
+
+#title-settings:before{
+    content: 'Set Title and Description'
 }
 
 #map-settings:before{
@@ -348,6 +356,10 @@ html, body {
     width: 170px;   
 }
 
+#set-map-button input[name=description]{
+    height: 100px;
+}
+
 #preview-button{
     width: 100px;
 }
@@ -464,6 +476,11 @@ html, body {
 
     .left{
         left: 40px;
+    }
+
+    #map-settings{
+        max-width: 206px;
+        min-width: 206px;
     }
 }
 

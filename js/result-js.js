@@ -6,6 +6,11 @@ function initializeCustomization(){
 	$('input[name=set-fast]')[0].value = parseInt(timeSliderOptions.animationRate.fast);
 	$('input[name=set-medium]')[0].value = parseInt(timeSliderOptions.animationRate.medium);
 	$('input[name=set-slow]')[0].value = parseInt(timeSliderOptions.animationRate.slow);
+
+	$('#title-settings input, #title-settings textarea').on('keydown', function(event){
+	  event.stopPropagation();
+	});
+
 }
 
 function setDataset(dataset){
@@ -24,9 +29,9 @@ function setDataset(dataset){
 	formState['size'] = {'toggle' : false, 'value' : dataset.pointSize};
 
 	//CHANGE THIS TO ACTUAL VALUE
-	$('input[name=set-span]')[0].value = dataset.duration || 100;
+	$('input[name=set-span]')[0].value = (dataset.duration) ? convertDurationToPercent(dataset.duration) : 100;
 	setVal('span-val', dataset.duration || 100);
-	formState['span'] = {'toggle' : false, 'value' : dataset.duration || 100};
+	formState['span'] = {'toggle' : false, 'value' : (dataset.duration) ? convertDurationToPercent(dataset.duration) : 100}
 	//
 
 	$('input[name=set-hardness]')[0].value = dataset.hardness;
@@ -39,6 +44,7 @@ function setDataset(dataset){
 
 	dataSetIndex++;
 	$('input').prop('disabled','');
+	$('textarea').prop('disabled','');
 }
 
 function switchDataset(index){
@@ -63,7 +69,7 @@ function updateAttributes(input){
 			break;
 		case 'span':
 			attributeName = 'duration';
-			value = (parseInt(value)/100.0)*(timeSlider.endTime - timeSlider.startTime);
+			value = convertPercentToDuration(value);
 			break;
 		case 'hardness':
 			attributeName = 'hardness';
@@ -98,7 +104,7 @@ function toggleAttribute(input){
 				break;
 			case 'span':
 				attributeName = 'duration';
-				value = (parseInt(value)/100.0)*(timeSlider.endTime - timeSlider.startTime);
+				value = convertPercentToDuration(value);
 				break;
 			case 'hardness':
 				attributeName = 'hardness';
@@ -153,6 +159,14 @@ function setData(index, attribute, value){
 function setMap(){
 	mapOptions.zoom = map.zoom;
 	mapOptions.center = map.center;
+}
+
+function convertPercentToDuration(percent){
+	return (parseInt(percent)/100.0)*(timeSliderOptions.endTime - timeSliderOptions.startTime);
+}
+
+function convertDurationToPercent(duration){
+	return parseInt(duration/(timeSliderOptions.endTime - timeSliderOptions.startTime) * 100);
 }
 
 function setChecked(id_str, isChecked){
@@ -232,8 +246,15 @@ function loadFormState(formState){
 	}
 }
 
+function preview(){
+	$(".tool-window").toggleClass("hidden"); 
+	$("#preview-button").toggleClass("preview").toggleClass("show-tools");
+	map.setZoom(mapOptions.zoom);
+	map.setCenter(mapOptions.center);
+}
+
 function submit(){
-	
+
 }
 
 $(initializeCustomization);
