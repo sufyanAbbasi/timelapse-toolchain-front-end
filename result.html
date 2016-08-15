@@ -22,123 +22,17 @@
     <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="https://explorables.cmucreatelab.org/data-visualization-tools/css/defaultUI.css" />
 
-    <!-- ***** INSERT CUSTOM-CSS HERE ****** -->
-    <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
-    <link rel="stylesheet" type="text/css" href="css/result-style.css"/>
-    <!-- ***** CUSTOM-CSS END ****** -->
+    <!-- ***** INSERT CUSTOM-CSS HERE ***** -->
+    <!-- ***** CUSTOM-CSS END ***** -->
+
   </head>
   <body>
     <div id="loading"></div>
     <div id="map-div"></div>
     <div id="time-slider-controls"></div>
 
-    <!-- ***** INSERT MAP-TOOLS HERE ****** -->
-    <div id='map-tools'>
-      <div id="preview-area" class="very-top center">
-        <div id="preview-button" class="preview button no-highlight" 
-        onclick='preview();'></div>
-        <div id="submit-button" class="button no-highlight" onclick='submit();'>Save</div>
-      </div>
-      <div class='tool-window top left' id='title-settings'>
-        <form >
-          <fieldset>
-            <label for="title">Title:<br><input type="textarea" name="title" disabled="true" /></label>
-            <br>
-            <label for="description">Description:<br><textarea name="description" cols="25" rows="8" disabled="true"></textarea></label>
-          </fieldset>
-        </form>
-      </div>
-      <div class='tool-window bottom right' id='map-settings'>
-        <div id='set-map-button' class="button no-highlight" onclick="setMap()">Set Current Map View</div>
-      </div>
-      <div class='tool-window bottom left' id='timeline-settings'>
-        <form>
-          <fieldset id='time-to-complete'>
-            <legend style="text-decoration: underline;">Time to Complete:</legend>
-            <label for="set-fast">Fast:</label><input disabled='true' type="number" name="set-fast" value=45 size=3 onchange='setTimeline("fast",parseInt(this.value))'/> ms
-            <br>
-            <label for="set-medium">Medium:</label><input disabled='true' type="number" name="set-medium" value=90 size=3 onchange='setTimeline("medium",parseInt(this.value))'/> ms
-            <br>
-            <label for="set-slow">Slow:</label><input disabled='true' type="number" name="set-slow" value=180 size=3 onchange='setTimeline("slow",parseInt(this.value))'/> ms
-          </fieldset>
-        </form>
-      </div>
-      <div class="tool-window top right" id="webgl-settings">
-        <select id='drop-down-list' onchange="switchDataset(this.value)"></select>
-        <div id="webgl-settings-list">
-          <ul>
-            <li>
-              <input disabled='true' id="toggle-color" class="tool-options no-highlight" name="toggle-color" type="checkbox" onclick="toggleAttribute(this)">
-              <label for="toggle-color" class="tool-options-label no-highlight">Point Color</label>
-            </li>
-            <hr>
-            <li>
-              <input disabled='true' id="toggle-size" class="tool-options no-highlight" name="toggle-size" type="checkbox" onclick="toggleAttribute(this)">
-              <label for="toggle-size" class="tool-options-label no-highlight">Point Size</label>
-            </li>
-            <hr>
-            <li>
-              <input disabled='true' id="toggle-span" class="tool-options no-highlight" name="toggle-span" type="checkbox" onclick="toggleAttribute(this)">
-              <label for="toggle-span" class="tool-options-label no-highlight">Point Life Span</label>
-            </li>
-            <hr>
-            <li>
-              <input disabled='true' id="toggle-hardness" class="tool-options no-highlight" name="toggle-hardness" type="checkbox" onclick="toggleAttribute(this)">
-              <label for="toggle-hardness" class="tool-options-label no-highlight">Hardness</label>
-            </li>
-            <hr>
-            <li>
-              <input disabled='true' id="toggle-blend" class="tool-options no-highlight" name="toggle-blend" type="checkbox" onclick="toggleAttribute(this)">
-              <label for="toggle-blend" class="tool-options-label no-highlight">Blend Mode</label>
-            </li>
-          </ul>
-        </div>
-        <div id="webgl-inner-tools">
-          <div class="triangle-pointer" id='first-pointer'></div>
-          <div class="triangle-pointer" id='second-pointer'></div>
-          <div class="triangle-pointer" id='third-pointer'></div>
-          <div class="triangle-pointer" id='fourth-pointer'></div>
-          <div class="triangle-pointer" id='fifth-pointer'></div>
-          <form>
-            <fieldset>
-                <legend class='visuallyhidden'>Point Attribute Settings</legend>
-                <ul>
-                  <li class="set-attribute">
-                    <label>Select Color:&emsp;<input disabled='true' name="set-color" type="color" 
-                      onclick="setChecked('toggle-color'); updateAttributes(this)" 
-                      onchange="setChecked('toggle-color'); updateAttributes(this)"/></label>
-                  </li>
-                  <li class="set-attribute">
-                    <input disabled='true' name="set-size" type="range" min="0" max="100" step="1" 
-                    oninput='setVal("size-val", this.value); setChecked("toggle-size"); updateAttributes(this)' 
-                    onchange='setVal("size-val", this.value); setChecked("toggle-size"); updateAttributes(this)' 
-                    />
-                    <label><input disabled='true' class="value" id="size-val" type='text' readonly></input>&thinsp;px</label>
-                  </li>
-                  <li class="set-attribute">
-                     <input disabled='true' name="set-span" type="range" min="-100" max="100" step="1" 
-                    oninput='setVal("span-val", this.value); setChecked("toggle-span"); updateAttributes(this)' 
-                    onchange='setVal("span-val", this.value); setChecked("toggle-span"); updateAttributes(this)'/>
-                    <label><input disabled='true' class="value" id="span-val" type='text' readonly></input>&thinsp;%</label>
-                  </li>
-                  <li class="set-attribute">
-                    <input disabled='true' name="set-hardness" type="range" min="0" max="1" step="0.1" 
-                    oninput='setVal("hardness-val", this.value); setChecked("toggle-hardness"); updateAttributes(this)' 
-                    onchange='setVal("hardness-val", this.value); setChecked("toggle-hardness"); updateAttributes(this)'/>
-                    <label><input disabled='true' class="value" id="hardness-val" type='text' readonly></input>&thinsp;px</label>
-                  </li>
-                  <li class="set-attribute">
-                     <label><input disabled='true' name="set-blend" type="radio" value="additive" onclick="setChecked('toggle-blend'); updateAttributes(this)"checked/> Additive </label>
-                    &emsp;
-                    <label><input disabled='true' name="set-blend" type="radio" value="solid" onclick="setChecked('toggle-blend'); updateAttributes(this)"/> Solid</label> 
-                  </li>
-                </ul>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- ***** MAP-TOOLS END ****** -->
+    <!-- ***** INSERT MAP-TOOLS HERE ***** -->
+    <!-- ***** MAP-TOOLS END ***** -->
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.24&key=AIzaSyB3jyGMTT0U184L-rhbFZS4IEKfnQmJAZI"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -168,8 +62,8 @@
         formatCurrentTime: function(date) { return date.getFullYear() },
         animationRate: { fast: 45.28, medium: 90.56, slow: 181.12 }
       };
-      var datasets = [{ name: 'example-x-y-time', url: 'example-x-y-time.bin', duration: null, hardness: null, pointSize: null }, { name: 'example-x-y-z-time', url: 'example-x-y-time.bin', duration: null, hardness: null, pointSize: null }];
-      // ,{ name: 'example-x-y-z-time', url: 'example-x-y-time.bin', duration: null, hardness: null, pointSize: null }];
+      var datasets = [{ name: 'example-x-y-time', url: 'example-x-y-time.bin', duration: 2089321200000, hardness: null, pointSize: null }//];
+      ,{ name: 'example-x-y-z-time', url: 'example-x-y-time.bin', duration: 2089321200000, hardness: null, pointSize: null }];
     </script>
 
     <script type="text/javascript">
@@ -273,11 +167,8 @@
           initializeWebGL(obj);
           if(obj.enabled != false) document.getElementById('loading').style.display = 'none';
           
-          //<!-- ***** INSERT SET_DATASET HERE ****** -->
-          if(setDataset){
-            setDataset(obj);
-          }
-          //<!-- ***** SET_DATASET END ****** -->
+          //<!-- ***** INSERT SET-DATASET HERE ***** -->
+          //<!-- ***** SET-DATASET END ***** -->
         }
         xhr.send();
       }
@@ -406,8 +297,7 @@
           gl_FragColor = vec4(u_Color.rgb, u_Color.a * alpha);
         } 
     </script>
-    <!-- ***** INSERT CUSTOM-JS HERE ****** -->
-    <script type="text/javascript" src="js/result-js.js"></script>
-    <!-- ***** CUSTOM-JS END ****** -->
+    <!-- ***** INSERT CUSTOM-JS HERE ***** -->
+    <!-- ***** CUSTOM-JS END ***** -->
   </body>
 </html>

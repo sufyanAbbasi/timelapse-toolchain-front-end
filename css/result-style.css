@@ -95,6 +95,7 @@ html, body {
 
 input, textarea{
     color: black;
+    font-size: 12px;
 }
 
 #map-tools{
@@ -103,6 +104,7 @@ input, textarea{
     width: 100%;
     height: 100%;
     pointer-events: none;
+    z-index: 50;
 }
 
 .very-top:{
@@ -117,10 +119,23 @@ input, textarea{
     bottom: 80px;
 }
 
-.center {
+.centerX {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.centerY {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.centerXY {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
 
 .left {
@@ -169,7 +184,6 @@ input, textarea{
 #webgl-settings{
     width: 20%;
     min-width: 430px;
-    z-index: 100;
 }
 
 #webgl-settings:before{
@@ -262,23 +276,29 @@ input, textarea{
 }
 
 #first-pointer{
-    top: 0px;
+    top: 2px;
 }
 #second-pointer{
-    top: 52px;
+    top: 54.5px;
 }
 #third-pointer{
-    top: 105px;
+    top: 106.5px;
 }
 #fourth-pointer{
-    top: 156px;
+    top: 157.5px;
 }
 #fifth-pointer{
-    top: 209px;
+    top: 226.5px;
+}
+
+.spacer{
+    height: 20px;
+    color: rgb(50,50,50);
+    background-color: rgb(230,230,230);
 }
 
 .set-attribute{
-    height: 50px;
+    height: 51.5px;
     line-height: 56px;
     margin-left: 25px;
 }
@@ -296,17 +316,14 @@ input, textarea{
     width: 25px;
     margin-top: 15px;
     color: black;
-    font-size: 13px;
 }
 
-#timeline-settings form{
+#timeline-settings form, #title-settings form{
     margin: 12px;
 }
 
 
 #timeline-settings input[type=number]{
-    font-size: 13px;
-    color: black;
     width: 35px;
 }
 
@@ -339,7 +356,6 @@ input, textarea{
     transition: background-color .3s;
     cursor: pointer;
     pointer-events: auto;
-    z-index: 150;
 }
 
 .button:hover {
@@ -360,8 +376,13 @@ input, textarea{
     height: 100px;
 }
 
+#preview-area{
+    min-width: 310px;
+}
+
 #preview-button{
     width: 100px;
+    float: left;
 }
 
 .preview:before{
@@ -372,10 +393,88 @@ input, textarea{
    content: 'Show Tools'; 
 }
 
-#submit-button{
-    width: 100px;
+#save-button{
+    width: 150px;
+    float: right;
 }
 
+.dark-background{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30,30,30, .85);
+    pointer-events: auto;
+    z-index: 100;
+}
+
+#share-window{
+    width: 350px;
+    height: 300px;
+}
+
+#share-window:before{
+    content: 'Share Links:';
+}
+
+.x-big{
+    top: 10px;
+    left: 10px;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    font-size: 45px;
+}
+
+.x-small{
+    top: 0px;
+    height: 30px;
+    width: 40px;
+    line-height: 30px;
+    font-size: 25px;
+    border-radius: 13px 0px 0px 0px;
+}
+
+.x-button{
+    position: absolute;
+    background-color: rgba(100,20,20,.65);
+    text-align: center;
+    transition: background-color .2s;
+}
+
+.x-button:before {
+    content: '\d7';
+}
+
+.x-button:hover {
+    background-color: rgba(50,20,20,.70);
+}
+
+.x-button:active {
+    background-color: rgba(50,50,50,.70);
+}
+
+.share-title {
+    margin: 10px;
+}
+
+.share-title > h4 {
+    font-weight: lighter; 
+    margin: 5px 0px;
+}
+
+.share-title > textarea {
+    width: 100%;
+    overflow: auto;
+}
+
+#download-button{
+    margin: 0px;
+    height: 30px;
+    line-height: 30px;
+    width: 170px;
+}
 
 /* ==========================================================================
    Helper classes
@@ -468,10 +567,16 @@ input, textarea{
    Modify as content requires.
    ========================================================================== */
 
+@media (max-width: 400px){
+    #share-window{
+        transform: translateY(-50%);
+        left: 20px;
+    }
+}
+
 @media  (max-width: 800px){
     .right{
-        right: 5%;
-        left: 300px;
+        left: 321px;
     }
 
     .left{
@@ -479,22 +584,29 @@ input, textarea{
     }
 
     #map-settings{
-        max-width: 206px;
-        min-width: 206px;
+        width: 206px;
+        left: 550px;
+    }
+
+    .center{
+        transform: none;
+        left: 274px;
     }
 }
 
-@media  (max-height: 450px){
+
+@media  (max-height: 664px){
+    .top{
+        top: 63px;
+    }
+
     .bottom{
         bottom: ;
-        top: 225px;
+        top: 425px;
     }
-}
 
-
-@media  (max-height: 600px){
-    .top{
-        top: 60px;
+    #map-settings{
+        height: 100px;
     }
 }
 
